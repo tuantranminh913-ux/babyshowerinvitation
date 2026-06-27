@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baby in Bloom — Mandy & Tuan</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600&family=Outfit:wght@300;600&family=Caveat:wght@700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --cream:#FBF5EC;
+  --rose:#B97A6E;
+  --ink:#4A3B38;
+}
+
+body{
+  margin:0;
+  font-family:'Outfit',sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+}
+
+nav{
+  position:fixed;
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  padding:16px 24px;
+  background:rgba(255,255,255,.85);
+  backdrop-filter:blur(10px);
+}
+
+nav a{
+  margin-left:16px;
+  text-decoration:none;
+  color:var(--ink);
+}
+
+.hero{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+
+.hero h1{
+  font-family:'Fraunces';
+  font-size:4rem;
+}
+
+.script{
+  font-family:'Caveat';
+  color:#B8923F;
+}
+
+.countdown{
+  margin-top:20px;
+  font-size:1.5rem;
+  font-weight:600;
+}
+
+section{
+  padding:80px 20px;
+  max-width:1000px;
+  margin:auto;
+}
+
+.card{
+  background:white;
+  padding:20px;
+  border-radius:16px;
+  margin-top:16px;
+}
+
+.gallery{
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  grid-auto-rows:260px;
+  gap:12px;
+}
+
+.gallery img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:12px;
+}
+
+.big{ grid-row:span 2; }
+
+form{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+input,select,textarea{
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #ddd;
+}
+
+button{
+  padding:12px;
+  background:var(--rose);
+  color:white;
+  border:none;
+  border-radius:8px;
+}
+
+footer{
+  text-align:center;
+  padding:40px;
+  background:var(--ink);
+  color:white;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div><strong>Mandy</strong> <span class="script">&amp;</span> <strong>Tuan</strong></div>
+  <div>
+    <a href="#details">Details</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#rsvp">RSVP</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <h1>Baby<br><span class="script">in bloom</span></h1>
+
+  <p>We're expecting our little girl 💕</p>
+
+  <div class="countdown" id="countdown"></div>
+</section>
+
+<section id="details">
+  <h2>Details</h2>
+
+  <div class="card">
+    <h3>Date</h3>
+    <p>25 July 2026 · 10:00 AM</p>
+  </div>
+
+  <div class="card">
+    <h3>Location</h3>
+    <p>Petersmindevej 29, Vejle</p>
+    <a href="https://maps.google.com?q=Petersmindevej+29+Vejle" target="_blank">Open map</a>
+  </div>
+</section>
+
+<section id="gallery">
+  <h2>Gallery</h2>
+
+  <div class="gallery">
+    <img src="images/photo1.jpg" class="big">
+    <img src="images/photo2.jpg">
+    <img src="images/photo3.jpg">
+    <img src="images/photo4.jpg">
+    <img src="images/photo5.jpg">
+  </div>
+</section>
+
+<section id="rsvp">
+  <h2>RSVP</h2>
+
+  <form id="form">
+    <input type="text" id="name" placeholder="Your name" required>
+
+    <select id="attending" required>
+      <option value="">Will you come?</option>
+      <option>Yes</option>
+      <option>No</option>
+    </select>
+
+    <textarea id="message" placeholder="Message"></textarea>
+
+    <button type="submit">Send RSVP</button>
+  </form>
+</section>
+
+<footer>
+  <p class="script">in bloom</p>
+  <p>Mandy &amp; Tuan</p>
+</footer>
+
+<script>
+/* COUNTDOWN */
+const eventDate = new Date("2026-07-25T10:00:00");
+
+function updateCountdown(){
+  const now = new Date();
+  const diff = eventDate - now;
+
+  if(diff <= 0){
+    document.getElementById("countdown").innerText = "It's happening today!";
+    return;
+  }
+
+  const days = Math.floor(diff / (1000*60*60*24));
+  const hours = Math.floor((diff / (1000*60*60)) % 24);
+  const mins = Math.floor((diff / (1000*60)) % 60);
+
+  document.getElementById("countdown").innerText =
+    `${days} days • ${hours} hrs • ${mins} mins`;
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+/* RSVP EMAIL */
+document.getElementById("form").addEventListener("submit", e=>{
+  e.preventDefault();
+
+  const name = document.getElementById("name").value;
+  const attending = document.getElementById("attending").value;
+  const message = document.getElementById("message").value;
+
+  const body = `Name: ${name}
+Attending: ${attending}
+Message: ${message}`;
+
+  window.location.href =
+    "mailto:your@email.com?subject=RSVP&body=" + encodeURIComponent(body);
+});
+</script>
+
+</body>
+</html>
