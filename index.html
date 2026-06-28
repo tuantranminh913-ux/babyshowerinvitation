@@ -3,232 +3,578 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Baby in Bloom — Mandy & Tuan</title>
+<title>Mandy's Baby Shower</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600&family=Outfit:wght@300;600&family=Caveat:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Fraunces:wght@400;500;600&family=Outfit:wght@300;400;500;600&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
   --cream:#FBF5EC;
-  --rose:#B97A6E;
+  --cream-deep:#F3E9DA;
+  --blush:#F3C9CE;
+  --blush-soft:#FAE1E3;
+  --rose-gold:#C98F84;
+  --rose-gold-deep:#B97A6E;
+  --daisy-white:#FFFFFF;
   --ink:#4A3B38;
+  --ink-soft:#7A6A65;
+  --gold-script:#B8923F;
+  --line:rgba(74,59,56,0.12);
+  --shadow:0 20px 60px -20px rgba(184,124,108,0.35);
 }
 
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
 body{
-  margin:0;
-  font-family:'Outfit',sans-serif;
   background:var(--cream);
+  color:transparent;
+  font-family:'Outfit', sans-serif;
+  line-height:1.5;
+  overflow-x:hidden;
+}
+
+.nav,
+.hero,
+.section,
+.footer,
+.rsvp-form{
   color:var(--ink);
 }
 
-nav{
+.nav *,
+.hero *,
+.section *,
+.footer *,
+.rsvp-form *{
+  color:inherit;
+}
+
+.nav{color:var(--ink);}
+
+h1,h2,h3{font-family:'Fraunces', serif; line-height:1.05;}
+
+.script{font-family:'Caveat', cursive; color:var(--gold-script); font-weight:600;}
+
+a{color:inherit; text-decoration:none;}
+
+.nav{
   position:fixed;
-  width:100%;
+  top:0;
+  left:0;
+  right:0;
+  z-index:100;
   display:flex;
   justify-content:space-between;
-  padding:16px 24px;
-  background:rgba(255,255,255,.85);
+  align-items:center;
+  padding:20px 6vw;
+  background:rgba(251,245,236,0.78);
   backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
 }
 
-nav a{
-  margin-left:16px;
-  text-decoration:none;
-  color:var(--ink);
-}
+.nav-brand{font-size:1.25rem; font-weight:600;}
+
+.nav-links{display:flex; gap:28px; font-size:.92rem; color:var(--ink-soft);}
+
+.nav-links a{transition:color .2s;}
+
+.nav-links a:hover{color:var(--rose-gold-deep);}
+
+@media(max-width:720px){.nav-links{display:none;}}
 
 .hero{
-  height:100vh;
+  position:relative;
+  min-height:100vh;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
   text-align:center;
+  padding:140px 6vw 70px;
+  background:
+    radial-gradient(circle at 18% 15%, rgba(243,201,206,0.55), transparent 42%),
+    radial-gradient(circle at 85% 12%, rgba(232,184,75,0.18), transparent 38%),
+    radial-gradient(circle at 88% 78%, rgba(201,143,132,0.30), transparent 45%),
+    linear-gradient(180deg, var(--cream) 0%, var(--cream) 70%, var(--cream-deep) 100%);
+}
+
+.floaty{position:absolute; pointer-events:none; opacity:.9;}
+
+.float-anim{animation:drift 9s ease-in-out infinite;}
+
+@keyframes drift{0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-18px) rotate(4deg);}}
+
+.hero-eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-size:.85rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--rose-gold-deep);
+  margin-bottom:22px;
+}
+
+.hero-eyebrow::before, .hero-eyebrow::after{
+  content:'';
+  width:28px;
+  height:1px;
+  background:var(--rose-gold-deep);
+  opacity:.5;
 }
 
 .hero h1{
-  font-family:'Fraunces';
-  font-size:4rem;
+  font-size:clamp(2.8rem, 8vw, 6rem);
+  color:var(--ink);
 }
 
-.script{
-  font-family:'Caveat';
-  color:#B8923F;
+.hero h1 .script-it{
+  display:block;
+  font-size:clamp(2.2rem, 6vw, 4.2rem);
+  color:var(--gold-script);
+  margin-top:4px;
 }
 
-.countdown{
-  margin-top:20px;
-  font-size:1.5rem;
+.hero-sub{
+  margin-top:26px;
+  max-width:100%;
+  font-size:1.08rem;
+  line-height:1.65;
+  color:var(--ink-soft);
+  white-space:nowrap;
+}
+
+.hero-countdown{
+  margin-top:18px;
+  font-size:.98rem;
   font-weight:600;
+  color:var(--ink);
+  background:rgba(255,255,255,.9);
+  display:inline-flex;
+  padding:12px 18px;
+  border-radius:999px;
+  box-shadow:0 12px 28px rgba(0,0,0,.08);
 }
 
-section{
-  padding:80px 20px;
-  max-width:1000px;
-  margin:auto;
-}
-
-.card{
-  background:white;
-  padding:20px;
-  border-radius:16px;
-  margin-top:16px;
-}
-
-.gallery{
-  display:grid;
-  grid-template-columns:2fr 1fr;
-  grid-auto-rows:260px;
-  gap:12px;
-}
-
-.gallery img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  border-radius:12px;
-}
-
-.big{ grid-row:span 2; }
-
-form{
+.hero-meta{
+  margin-top:34px;
   display:flex;
-  flex-direction:column;
-  gap:12px;
+  flex-wrap:wrap;
+  gap:14px 36px;
+  justify-content:center;
+  font-size:.95rem;
+  color:var(--ink);
 }
 
-input,select,textarea{
-  padding:10px;
-  border-radius:8px;
-  border:1px solid #ddd;
+.hero-meta-item{display:flex; align-items:center; gap:9px;}
+
+.hero-meta-item svg{width:18px; height:18px; flex-shrink:0; color:var(--rose-gold-deep);}
+
+.divider{position:relative; display:flex; justify-content:center; padding:0; margin:0; height:120px; background:var(--cream);}
+
+.divider.flip{transform:scaleY(-1);}
+
+.section{padding:100px 6vw;}
+
+.section-inner{max-width:1080px; margin:0 auto;}
+
+.eyebrow{
+  font-size:.82rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--rose-gold-deep);
+  margin-bottom:14px;
+  display:block;
 }
 
-button{
-  padding:12px;
-  background:var(--rose);
-  color:white;
-  border:none;
-  border-radius:8px;
+.section-head{max-width:620px; margin-bottom:56px;}
+
+.section-head h2{font-size:clamp(2rem, 4vw, 2.8rem); color:var(--ink);}
+
+.section-head p{margin-top:14px; color:var(--ink-soft); font-size:1.04rem; line-height:1.65;}
+
+.details{background:var(--cream);}
+
+.detail-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:24px;}
+
+@media(max-width:880px){.detail-grid{grid-template-columns:1fr;}}
+
+.detail-card{
+  background:var(--daisy-white);
+  border-radius:22px;
+  padding:34px 30px;
+  border:1px solid var(--line);
+  transition:transform .3s ease, box-shadow .3s ease;
 }
 
-footer{
-  text-align:center;
-  padding:40px;
-  background:var(--ink);
-  color:white;
+.detail-card:hover{transform:translateY(-4px); box-shadow:var(--shadow);}
+
+.detail-icon{
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  background:var(--blush-soft);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:20px;
+  color:var(--rose-gold-deep);
 }
+
+.detail-card h3{font-size:1.2rem; margin-bottom:8px; color:var(--ink);}
+
+.detail-card p{color:var(--ink-soft); font-size:.97rem; line-height:1.6;}
+
+.accent-line{font-family:'Fraunces', serif; font-size:1.4rem; color:var(--rose-gold-deep); margin-top:4px;}
+
+.map-link{display:inline-flex; align-items:center; gap:6px; margin-top:14px; font-size:.9rem; color:var(--rose-gold-deep); border-bottom:1px solid currentColor; padding-bottom:1px;}
+
+.story{background:var(--cream-deep); text-align:center;}
+
+.story-inner{max-width:680px; margin:0 auto; text-align:center;}
+
+.story-quote{font-family:'Fraunces', serif; font-style:italic; font-weight:400; font-size:clamp(1.3rem, 2.6vw, 1.7rem); line-height:1.55; color:var(--ink);}
+
+.story-sign{margin-top:28px; font-family:'DM Serif Display', serif; font-size:1.8rem; color:var(--gold-script);}
+
+.petals-row{display:flex; justify-content:center; gap:18px; margin-bottom:32px;}
+
+.petals-row svg{width:34px; height:34px; opacity:.85;}
+
+.gallery-section{background:var(--cream);}
+
+.gallery-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:18px;}
+
+.gallery-grid > div:nth-child(1){grid-column:span 2; grid-row:span 2;}
+
+.gallery-grid > div:nth-child(4){grid-column:span 2;}
+
+@media(max-width:760px){
+  .gallery-grid{grid-template-columns:repeat(2,1fr);}
+  .gallery-grid > div:nth-child(1){grid-column:span 2; grid-row:span 1;}
+  .gallery-grid > div:nth-child(4){grid-column:span 1;}
+}
+
+.gallery-photo{aspect-ratio:1/1; border-radius:18px; overflow:hidden; background:linear-gradient(135deg, var(--blush-soft), var(--cream-deep)); display:flex; align-items:center; justify-content:center; color:var(--rose-gold); position:relative; border:1px solid var(--line);}
+
+.gallery-photo img{width:100%; height:100%; object-fit:cover;}
+
+.gallery-caption{position:absolute; bottom:12px; left:14px; font-size:.75rem; color:var(--ink-soft); letter-spacing:.04em;}
+
+.footer{background:var(--ink); color:var(--cream); text-align:center; padding:64px 6vw 40px;}
+
+.footer .script{font-size:2.4rem; color:#E3C77E; display:block; margin-bottom:10px;}
+
+.footer h3{font-family:'Fraunces', serif; font-size:1.5rem; color:var(--cream); margin-bottom:14px;}
+
+.footer p{color:rgba(251,245,236,.65); font-size:.95rem; max-width:480px; margin:0 auto 28px; line-height:1.6;}
+
+.footer-line{width:60px; height:1px; background:rgba(251,245,236,.25); margin:0 auto 28px;}
+
+.footer-meta{font-size:.82rem; color:rgba(251,245,236,.4); margin-top:30px;}
+
+.rsvp{background:var(--cream-deep);}
+
+.rsvp-form{max-width:520px; margin:0 auto; display:grid; gap:24px; padding:48px; background:var(--daisy-white); border-radius:22px; border:1px solid var(--line); box-shadow:0 4px 16px -4px rgba(74,59,56,.1);}
+
+.form-group{display:flex; flex-direction:column; gap:8px;}
+
+.form-group label{font-size:.95rem; font-weight:500; color:var(--ink); display:block;}
+
+.form-input{padding:12px 14px; border:1px solid var(--line); border-radius:8px; font-family:'Outfit', sans-serif; font-size:.95rem; color:var(--ink); background:var(--daisy-white); transition:border-color .2s, box-shadow .2s;}
+
+.form-input:focus{outline:none; border-color:var(--rose-gold); box-shadow:0 0 0 3px rgba(201,143,132,.1);}
+
+.form-input::placeholder{color:var(--ink-soft); opacity:.6;}
+
+.btn-submit{padding:14px 32px; background:var(--rose-gold-deep); color:var(--daisy-white); border:none; border-radius:8px; font-family:'Outfit', sans-serif; font-size:.95rem; font-weight:600; cursor:pointer; transition:background .3s ease, transform .2s ease;}
+
+.btn-submit:hover{background:var(--rose-gold); transform:translateY(-2px);}
+
+.btn-submit:active{transform:translateY(0);}
+
+.btn-submit:disabled{background:var(--ink-soft); cursor:not-allowed; opacity:.6;}
+
+.rsvp-status{padding:14px 16px; border-radius:8px; font-size:.9rem; text-align:center; display:none;}
+
+.rsvp-status.show{display:block;}
+
+.rsvp-status.success{background:#D4F5E8; color:#047857;}
+
+.rsvp-status.error{background:#FEE2E2; color:#991B1B;}
+
+.reveal{opacity:0; transform:translateY(24px); transition:opacity .8s ease, transform .8s ease;}
+
+.reveal.in{opacity:1; transform:translateY(0);}
 </style>
 </head>
 
 <body>
 
-<nav>
-  <div><strong>Mandy</strong> <span class="script">&amp;</span> <strong>Tuan</strong></div>
-  <div>
+<nav class="nav">
+  <div class="nav-brand">Mandy <span class="script">&amp;</span> Tuan</div>
+  <div class="nav-links">
     <a href="#details">Details</a>
+    <a href="#story">Our Story</a>
     <a href="#gallery">Gallery</a>
     <a href="#rsvp">RSVP</a>
   </div>
 </nav>
 
 <section class="hero">
-  <h1>Baby<br><span class="script">in bloom</span></h1>
+  <svg class="floaty float-anim" style="top:14%; left:7%; width:64px;" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#F3C9CE"></circle></svg>
+  <svg class="floaty float-anim" style="top:62%; left:4%; width:38px; animation-delay:1.2s;" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#E8B84B" opacity="0.55"></circle></svg>
+  <svg class="floaty float-anim" style="top:10%; right:8%; width:50px; animation-delay:0.6s;" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#C98F84" opacity="0.7"></circle></svg>
+  <svg class="floaty float-anim" style="top:70%; right:6%; width:70px; animation-delay:1.8s;" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#F3C9CE" opacity="0.85"></circle></svg>
+  <svg class="floaty float-anim" style="top:18%; right:18%; width:46px; animation-delay:0.3s;" viewBox="0 0 120 120" aria-hidden="true">
+    <g fill="#fff" stroke="#eee" stroke-width="1">
+      <ellipse cx="60" cy="30" rx="14" ry="22"></ellipse>
+      <ellipse cx="60" cy="90" rx="14" ry="22"></ellipse>
+      <ellipse cx="30" cy="60" rx="22" ry="14"></ellipse>
+      <ellipse cx="90" cy="60" rx="22" ry="14"></ellipse>
+    </g>
+    <circle cx="60" cy="60" r="14" fill="#E8B84B"></circle>
+  </svg>
 
-  <p>We're expecting our little girl 💕</p>
-
-  <div class="countdown" id="countdown"></div>
-</section>
-
-<section id="details">
-  <h2>Details</h2>
-
-  <div class="card">
-    <h3>Date</h3>
-    <p>25 July 2026 · 10:00 AM</p>
+  <span class="hero-eyebrow">HOSTED BY MANDY &amp; TUAN</span>
+  <h1>Baby <span class="script-it">Shower</span></h1>
+  <p class="hero-sub">We're throwing petals in the air — It's a girl!<br> Join us for a cozy brunch and celebrating the newest bloom in our family.</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <svg fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="16" rx="2.5"></rect><path d="M3 9.5h18M8 3v3M16 3v3" stroke-linecap="round"></path></svg>
+      <span>Saturday, 1 August · 11:00 AM</span>
+    </div>
+    <div class="hero-meta-item">
+      <svg fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M12 21s7-7.2 7-12.2A7 7 0 0 0 5 8.8C5 13.8 12 21 12 21z"></path><circle cx="12" cy="8.8" r="2.5"></circle></svg>
+      <span>Petersmindevej 29, Vejle</span>
+    </div>
   </div>
+  <div class="hero-countdown" id="hero-countdown">Loading countdown…</div>
+</section>
 
-  <div class="card">
-    <h3>Location</h3>
-    <p>Petersmindevej 29, Vejle</p>
-    <a href="https://maps.google.com?q=Petersmindevej+29+Vejle" target="_blank">Open map</a>
+<div class="divider" aria-hidden="true">
+  <svg viewBox="0 0 120 120" width="120"><g>
+      <ellipse class="daisy-petal" cx="60" cy="28" rx="13" ry="22" fill="#FFFFFF" stroke="#F0E6DC"></ellipse>
+      <ellipse class="daisy-petal" cx="60" cy="92" rx="13" ry="22" fill="#FFFFFF" stroke="#F0E6DC"></ellipse>
+      <ellipse class="daisy-petal" cx="28" cy="60" rx="22" ry="13" fill="#FFFFFF" stroke="#F0E6DC"></ellipse>
+      <ellipse class="daisy-petal" cx="92" cy="60" rx="22" ry="13" fill="#FFFFFF" stroke="#F0E6DC"></ellipse>
+      <circle class="daisy-center" cx="60" cy="60" r="16" fill="#E8B84B"></circle>
+  </g></svg>
+</div>
+
+<section class="section details" id="details">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <span class="eyebrow">THE PARTICULARS</span>
+      <h2>Everything you need to know</h2>
+      <p>A small, sweet gathering — come as you are, leave with a full heart and laughter.</p>
+    </div>
+    <div class="detail-grid">
+      <div class="detail-card reveal">
+        <div class="detail-icon"><svg fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="16" rx="2.5"></rect><path d="M3 9.5h18M8 3v3M16 3v3" stroke-linecap="round"></path></svg></div>
+        <h3>Date &amp; Time</h3>
+        <p>Mark your calendar for a morning full of daisies and good company.</p>
+        <div class="accent-line">Sat, 1 August · 11:00 AM</div>
+      </div>
+      <div class="detail-card reveal">
+        <div class="detail-icon"><svg fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M12 21s7-7.2 7-12.2A7 7 0 0 0 5 8.8C5 13.8 12 21 12 21z"></path><circle cx="12" cy="8.8" r="2.5"></circle></svg></div>
+        <h3>Location</h3>
+        <p>Petersmindevej 29, 7100 Vejle, Denmark</p>
+        <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Petersmindevej+29,+7100+Vejle" target="_blank" rel="noopener">Open in Maps <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+      </div>
+      <div class="detail-card reveal">
+        <div class="detail-icon"><svg fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M20.8 4.6c-1.5-1.5-4-1.5-5.5 0L12 7.9 8.7 4.6c-1.5-1.5-4-1.5-5.5 0-1.5 1.5-1.5 4 0 5.5L12 18.7l8.8-8.6c1.5-1.5 1.5-4 0-5.5z"></path></svg></div>
+        <h3>Note</h3>
+        <p>It's a girl only party!</p>
+      </div>
+    </div>
   </div>
 </section>
 
-<section id="gallery">
-  <h2>Gallery</h2>
+<div class="divider flip" aria-hidden="true">
+  <svg viewBox="0 0 120 120" width="120"><g>
+      <ellipse class="daisy-petal" cx="60" cy="28" rx="13" ry="22" fill="#FFFFFF" stroke="#F0E6DC"></ellipse>
+      <ellipse class="daisy-petal" cx="60" cy="92" rx="13" ry="22" fill="#FFFFFF" stroke="#F0E6DC"></ellipse>
+      <ellipse class="daisy-petal" cx="28" cy="60" rx="22" ry="13" fill="#FFFFFF" stroke="#F0E6DC"></ellipse>
+      <ellipse class="daisy-petal" cx="92" cy="60" rx="22" ry="13" fill="#FFFFFF" stroke="#F0E6DC"></ellipse>
+      <circle class="daisy-center" cx="60" cy="60" r="16" fill="#E8B84B"></circle>
+  </g></svg>
+</div>
 
-  <div class="gallery">
-    <img src="images/photo1.jpg" class="big">
-    <img src="images/photo2.jpg">
-    <img src="images/photo3.jpg">
-    <img src="images/photo4.jpg">
-    <img src="images/photo5.jpg">
+<section class="section story" id="story">
+  <div class="section-inner">
+    <div class="petals-row reveal">
+      <svg viewBox="0 0 24 24" fill="#F3C9CE"><path d="M12 2C9 2 7 5 7 8c0 2 2 3 5 3s5-1 5-3c0-3-2-6-5-6z"></path></svg>
+      <svg viewBox="0 0 24 24" fill="#E8B84B"><circle cx="12" cy="12" r="5"></circle></svg>
+      <svg viewBox="0 0 24 24" fill="#C98F84"><path d="M12 2C9 2 7 5 7 8c0 2 2 3 5 3s5-1 5-3c0-3-2-6-5-6z"></path></svg>
+    </div>
+    <p class="story-quote reveal">"We can't quite believe it — in just a few weeks, we'll be holding our daughter. This little one has already filled our home with so much hope, and we'd love nothing more than to celebrate her coming with the people who mean the most to us."</p>
+    <p class="story-sign reveal">— Mandy &amp; Tuan</p>
   </div>
 </section>
 
-<section id="rsvp">
-  <h2>RSVP</h2>
+<div class="divider" aria-hidden="true">
+  <svg viewBox="0 0 120 120" width="120"><g>
+      <ellipse class="daisy-petal" cx="60" cy="28" rx="13" ry="22" fill="#FFFFFF" stroke="#F0E6DC"></ellipse>
+      <ellipse class="daisy-petal" cx="60" cy="92" rx="13" ry="22" fill="#FFFFFF" stroke="#F0E6DC"></ellipse>
+      <ellipse class="daisy-petal" cx="28" cy="60" rx="22" ry="13" fill="#FFFFFF" stroke="#F0E6DC"></ellipse>
+      <ellipse class="daisy-petal" cx="92" cy="60" rx="22" ry="13" fill="#FFFFFF" stroke="#F0E6DC"></ellipse>
+      <circle class="daisy-center" cx="60" cy="60" r="16" fill="#E8B84B"></circle>
+  </g></svg>
+</div>
 
-  <form id="form">
-    <input type="text" id="name" placeholder="Your name" required>
-
-    <select id="attending" required>
-      <option value="">Will you come?</option>
-      <option>Yes</option>
-      <option>No</option>
-    </select>
-
-    <textarea id="message" placeholder="Message"></textarea>
-
-    <button type="submit">Send RSVP</button>
-  </form>
+<section class="section gallery-section" id="gallery">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <span class="eyebrow">A FEW FAVORITES</span>
+      <h2>Moments along the way</h2> </p>
+    </div>
+    <div class="gallery-grid">
+      <div class="reveal"><div class="gallery-photo"><img src="photo1.png" alt="Photo 1"><span class="gallery-caption">Photo 1</span></div></div>
+      <div class="reveal"><div class="gallery-photo"><img src="photo2.jpeg" alt="Photo 2"><span class="gallery-caption">Photo 2</span></div></div>
+      <div class="reveal"><div class="gallery-photo"><img src="photo3.jpeg" alt="Photo 3"><span class="gallery-caption">Photo 3</span></div></div>
+      <div class="reveal"><div class="gallery-photo"><img src="photo4.jpeg" alt="Photo 4"><span class="gallery-caption">Photo 4</span></div></div>
+      <div class="reveal"><div class="gallery-photo"><img src="photo5.jpeg" alt="Photo 5"><span class="gallery-caption">Photo 5</span></div></div>
+      <div class="reveal"><div class="gallery-photo"><img src="photo6.jpeg" alt="Photo 6"><span class="gallery-caption">Photo 6</span></div></div>
+      <div class="reveal"><div class="gallery-photo"><img src="photo7.jpeg" alt="Photo 7"><span class="gallery-caption">Photo 7</span></div></div>
+      <div class="reveal"><div class="gallery-photo"><img src="photo8.jpeg" alt="Photo 8"><span class="gallery-caption">Photo 8</span></div></div>
+    </div>
+  </div>
 </section>
 
-<footer>
-  <p class="script">in bloom</p>
-  <p>Mandy &amp; Tuan</p>
+<section class="section rsvp" id="rsvp">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <span class="eyebrow">YOUR RESPONSE</span>
+      <h2>Will you join us?</h2>
+      <p>Let us know you're coming — we'd love to have you there.</p>
+    </div>
+    <form id="rsvp-form" class="rsvp-form reveal">
+      <div class="form-group">
+        <label for="rsvp-name">Your Name</label>
+        <input id="rsvp-name" class="form-input" type="text" required placeholder="First and last name">
+      </div>
+      <div class="form-group">
+        <label for="rsvp-attending">Will you be attending?</label>
+        <select id="rsvp-attending" class="form-input" required>
+          <option value="">Select...</option>
+          <option value="yes">Yes, I'll be there!</option>
+          <option value="no">Sorry, can't make it</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="rsvp-dietary">Food restrictions or allergies</label>
+        <input id="rsvp-dietary" class="form-input" type="text" placeholder="e.g. vegetarian, nut allergy, none">
+      </div>
+      <div class="form-group">
+        <label for="rsvp-message">Say something nice (optional)</label>
+        <textarea id="rsvp-message" class="form-input" rows="4" placeholder="We can't wait to..."></textarea>
+      </div>
+      <button type="submit" class="btn-submit">Send RSVP</button>
+      <div id="rsvp-status" class="rsvp-status"></div>
+    </form>
+  </div>
+</section>
+
+<footer class="footer">
+  <span class="script">Baby in bloom</span>
+  <h3>Mandy &amp; Tuan</h3>
+  <div class="footer-line"></div>
+  <nobr>Petersmindevej 29, 7100 Vejle, Denmark · Saturday, 1 August at 11:00 AM</nobr>
+  <p class="footer-meta"></p>
 </footer>
 
 <script>
-/* COUNTDOWN */
-const eventDate = new Date("2026-07-25T10:00:00");
+const revealEls = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(entry => { if(entry.isIntersecting){ entry.target.classList.add('in'); }});
+},{threshold:0.15});
+revealEls.forEach(el => revealObserver.observe(el));
 
-function updateCountdown(){
+const dividers = document.querySelectorAll('.divider');
+const dividerObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(entry => { if(entry.isIntersecting){ entry.target.classList.add('bloomed'); }});
+},{threshold:0.4});
+dividers.forEach(div => dividerObserver.observe(div));
+
+const rsvpForm = document.getElementById('rsvp-form');
+const statusDiv = document.getElementById('rsvp-status');
+
+rsvpForm.addEventListener('submit', (e)=>{
+  e.preventDefault();
+  const name = document.getElementById('rsvp-name').value.trim();
+  const attending = document.getElementById('rsvp-attending').value;
+  const dietary = document.getElementById('rsvp-dietary').value.trim();
+  const message = document.getElementById('rsvp-message').value.trim();
+
+  if(!name || !attending){
+    showStatus('Please fill in all required fields', 'error');
+    return;
+  }
+
+  statusDiv.textContent = '✓ RSVP received — thanks for letting us know!';
+  statusDiv.className = 'rsvp-status show success';
+  rsvpForm.reset();
+  setTimeout(()=>{ statusDiv.classList.remove('show'); }, 4000);
+});
+
+function showStatus(msg, type){
+  statusDiv.textContent = msg;
+  statusDiv.className = `rsvp-status show ${type}`;
+}
+
+const eventDate = new Date('2026-08-01T11:00:00');
+const heroCountdown = document.getElementById('hero-countdown');
+
+function updateHeroCountdown(){
   const now = new Date();
   const diff = eventDate - now;
-
   if(diff <= 0){
-    document.getElementById("countdown").innerText = "It's happening today!";
+    heroCountdown.textContent = 'The celebration starts now!';
     return;
   }
 
   const days = Math.floor(diff / (1000*60*60*24));
   const hours = Math.floor((diff / (1000*60*60)) % 24);
-  const mins = Math.floor((diff / (1000*60)) % 60);
+  const minutes = Math.floor((diff / (1000*60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
 
-  document.getElementById("countdown").innerText =
-    `${days} days • ${hours} hrs • ${mins} mins`;
+  heroCountdown.textContent = `${days}d ${hours}h ${minutes}m until the party`;
 }
 
-setInterval(updateCountdown, 1000);
-updateCountdown();
+updateHeroCountdown();
+setInterval(updateHeroCountdown, 1000);
+</script>
+const form = document.getElementById("rsvp-form");
 
-/* RSVP EMAIL */
-document.getElementById("form").addEventListener("submit", e=>{
-  e.preventDefault();
+form.addEventListener("submit", async function (e) {
+  e.preventDefault(); // stop page reload
 
-  const name = document.getElementById("name").value;
-  const attending = document.getElementById("attending").value;
-  const message = document.getElementById("message").value;
+  // collect data from your form
+  const data = {
+    name: document.getElementById("rsvp-name").value,
+    attending: document.getElementById("rsvp-attending").value,
+    dietary: document.getElementById("rsvp-dietary").value,
+    message: document.getElementById("rsvp-message").value
+  };
 
-  const body = `Name: ${name}
-Attending: ${attending}
-Message: ${message}`;
+  try {
+    const response = await fetch("https://script.google.com/macros/s/AKfycbxB3qiuYuTkpgk4dGdTyD5ASrbEGJ6OuoQYlmEmXkrugBdyEDb84nPebAPPYQPPQxSc/exec", {
+      method: "POST",
+      body: JSON.stringify(data)
+    });
 
-  window.location.href =
-    "mailto:tuantranminh913@gmail.com?subject=RSVP&body=" + encodeURIComponent(body);
+    const result = await response.json();
+
+    document.getElementById("rsvp-status").innerText =
+      "✅ RSVP sent successfully!";
+    
+    form.reset(); // clear form
+  } catch (error) {
+    document.getElementById("rsvp-status").innerText =
+      "❌ Error sending RSVP";
+  }
 });
 </script>
-
 </body>
 </html>
