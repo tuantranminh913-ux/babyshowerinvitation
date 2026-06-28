@@ -338,7 +338,7 @@ a{color:inherit; text-decoration:none;}
 
   <span class="hero-eyebrow">HOSTED BY MANDY &amp; TUAN</span>
   <h1>Baby <span class="script-it">Shower</span></h1>
-  <p class="hero-sub">We're throwing petals in the air — It's a girl!<br> Join us for a cozy brunch and celebrating the newest bloom in our family.</p>
+  <p class="hero-sub">We're throwing petals in the air — It's a girl!<br>Join us for a cozy brunch and celebrating <br>the newest bloom in our family.</p>
   <div class="hero-meta">
     <div class="hero-meta-item">
       <svg fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="16" rx="2.5"></rect><path d="M3 9.5h18M8 3v3M16 3v3" stroke-linecap="round"></path></svg>
@@ -479,7 +479,9 @@ a{color:inherit; text-decoration:none;}
   <span class="script">Baby in bloom</span>
   <h3>Mandy &amp; Tuan</h3>
   <div class="footer-line"></div>
-  <nobr>Petersmindevej 29, 7100 Vejle, Denmark · Saturday, 1 August at 11:00 AM</nobr>
+  <p style="text-align: center;">
+  Petersmindevej 29, 7100 Vejle, Denmark<br>
+  Saturday, 1 August at 11:00 AM
   <p class="footer-meta"></p>
 </footer>
 
@@ -554,7 +556,7 @@ function updateHeroCountdown(){
   const minutes = Math.floor((diff / (1000*60)) % 60);
   const seconds = Math.floor((diff / 1000) % 60);
 
-  heroCountdown.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s until the party`;
+  heroCountdown.textContent = `${days}d ${hours}h ${minutes}m until the party`;
 }
 
 updateHeroCountdown();
