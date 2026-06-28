@@ -499,6 +499,11 @@ dividers.forEach(div => dividerObserver.observe(div));
 const rsvpForm = document.getElementById('rsvp-form');
 const statusDiv = document.getElementById('rsvp-status');
 
+function showStatus(msg, type){
+  statusDiv.textContent = msg;
+  statusDiv.className = `rsvp-status show ${type}`;
+}
+
 rsvpForm.addEventListener('submit', async (e)=>{
   e.preventDefault();
   const name = document.getElementById('rsvp-name').value.trim();
@@ -511,26 +516,27 @@ rsvpForm.addEventListener('submit', async (e)=>{
     return;
   }
 
-const data = {
-  name,
-  attending,
-  dietary,
-  message
-};
+  const data = {
+    name,
+    attending,
+    dietary,
+    message
+  };
 
-try {
-  await fetch('https://script.google.com/macros/s/AKfycbxB3qiuYuTkpgk4dGdTyD5ASrbEGJ6OuoQYlmEmXkrugBdyEDb84nPebAPPYQPPQxSc/exec', {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(data)
-  });
-function showStatus(msg, type){
-  statusDiv.textContent = msg;
-  statusDiv.className = `rsvp-status show ${type}`;
-}
+  try {
+    await fetch('https://script.google.com/macros/s/AKfycbxB3qiuYuTkpgk4dGdTyD5ASrbEGJ6OuoQYlmEmXkrugBdyEDb84nPebAPPYQPPQxSc/exec', {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+    showStatus('Thank you! Your RSVP has been sent.', 'success');
+  } catch (error) {
+    showStatus('Sorry, something went wrong. Please try again.', 'error');
+  }
+});
 
 const eventDate = new Date('2026-08-01T11:00:00');
 const heroCountdown = document.getElementById('hero-countdown');
@@ -548,7 +554,7 @@ function updateHeroCountdown(){
   const minutes = Math.floor((diff / (1000*60)) % 60);
   const seconds = Math.floor((diff / 1000) % 60);
 
-  heroCountdown.textContent = `${days}d ${hours}h ${minutes}m until the party`;
+  heroCountdown.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s until the party`;
 }
 
 updateHeroCountdown();
