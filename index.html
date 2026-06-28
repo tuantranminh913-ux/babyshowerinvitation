@@ -511,27 +511,22 @@ rsvpForm.addEventListener('submit', async (e)=>{
     return;
   }
 
-  const data = new URLSearchParams({
-    name,
-    attending,
-    dietary,
-    message
+const data = {
+  name,
+  attending,
+  dietary,
+  message
+};
+
+try {
+  await fetch('https://script.google.com/macros/s/AKfycbxB3qiuYuTkpgk4dGdTyD5ASrbEGJ6OuoQYlmEmXkrugBdyEDb84nPebAPPYQPPQxSc/exec', {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
   });
-
-  try {
-    await fetch('https://script.google.com/macros/s/AKfycbxB3qiuYuTkpgk4dGdTyD5ASrbEGJ6OuoQYlmEmXkrugBdyEDb84nPebAPPYQPPQxSc/exec', {
-      method: 'POST',
-      mode: 'no-cors',
-      body: data
-    });
-
-    showStatus('✅ RSVP sent! Thank you.', 'success');
-    rsvpForm.reset();
-  } catch (err) {
-    showStatus('Oops, something went wrong. Try again later.', 'error');
-  }
-});
-
 function showStatus(msg, type){
   statusDiv.textContent = msg;
   statusDiv.className = `rsvp-status show ${type}`;
